@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termux Full-Stack Web App</title>
-    <!-- Google မြန်မာဖောင့် လှမ်းချိတ်ခြင်း -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
-    <!-- CSS ဖိုင် လှမ်းချိတ်ခြင်း -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ၁။ Navigation Bar (Menu) -->
+    <!-- ၁။ Navigation Menu -->
     <nav class="navbar">
         <div class="logo">MyWebsite</div>
         <ul class="nav-links">
@@ -23,9 +21,8 @@
         </ul>
     </nav>
 
-    <!-- ၂။ ဝန်ဆောင်မှု ကတ်ပြားများ (Cards) -->
+    <!-- ၂။ ဝန်ဆောင်မှု Cards -->
     <h2 class="section-title">ကျွန်ုပ်တို့၏ ဝန်ဆောင်မှုများ</h2>
-    
     <div class="card-container">
         <div class="card">
             <h3>Frontend</h3>
@@ -41,35 +38,46 @@
         </div>
     </div>
 
-    <!-- ၃။ ဆက်သွယ်ရန် ဖောင် (Contact Form) -->
+    <!-- ၃။ ဆက်သွယ်ရန် Form -->
     <h2 class="section-title">ဆက်သွယ်ရန် ဖောင်</h2>
-    
     <div class="form-container">
         <form id="contactForm">
             <div class="form-group">
                 <label for="name">နာမည်။</label>
-                <input type="text" id="name" placeholder="သင့်နာမည် ရိုက်ထည့်ပါ" required>
+                <input type="text" id="name" placeholder="သင့်နာမည် ရိုက်ထည့်ပါ">
             </div>
-            
             <div class="form-group">
                 <label for="email">အီးမေးလ်။</label>
-                <input type="email" id="email" placeholder="သင့်အီးမေးလ် ရိုက်ထည့်ပါ" required>
+                <input type="email" id="email" placeholder="သင့်အီးမေးလ် ရိုက်ထည့်ပါ">
             </div>
-            
             <div class="form-group">
                 <label for="message">ပေးပို့လိုသော စာတို။</label>
-                <textarea id="message" rows="4" placeholder="ဒီနေရာမှာ စာရေးပါ..." required></textarea>
+                <textarea id="message" rows="4" placeholder="ဒီနေရာမှာ စာရေးပါ..."></textarea>
             </div>
-            
             <button type="button" class="btn-submit" onclick="sendData()">ပို့မည်</button>
         </form>
     </div>
 
-    <!-- ၄။ Admin Dashboard (ဇယားကွက်တွင် ဖျက်ရန် ကော်လံတိုးထားသည်) -->
-    <h2 class="section-title">Admin Dashboard (လက်ခံရရှိသော စာရင်းများ)</h2>
-    
-    <div class="dashboard-container" style="max-width: 900px; margin: 20px auto 50px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto;">
-        <button type="button" class="btn-submit" onclick="loadDashboardData()" style="width: auto; margin-bottom: 15px; padding: 8px 15px; font-size: 14px;">စာရင်းအသစ်များ ပြန်ယူမည်</button>
+    <!-- ၄။ Admin Login Section (Dashboard အပေါ်တွင် ကာထားမည်) -->
+    <h2 class="section-title">Admin Login (စီမံခန့်ခွဲသူဝင်ရန်)</h2>
+    <div id="loginBox" class="form-container" style="max-width: 400px; margin-bottom: 30px;">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="adminUser" placeholder="admin">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="adminPass" placeholder="password123">
+        </div>
+        <button type="button" class="btn-submit" onclick="loginAdmin()">အကောင့်ဝင်မည်</button>
+    </div>
+
+    <!-- ၅။ Admin Dashboard (အစပိုင်းတွင် လုံခြုံရေးအရ ဝှက်ထားမည် `display: none`) -->
+    <div id="dashboardSection" class="dashboard-container" style="max-width: 900px; margin: 20px auto 50px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <button type="button" class="btn-submit" onclick="loadDashboardData()" style="width: auto; padding: 8px 15px; font-size: 14px; margin: 0;">စာရင်းအသစ်များ ပြန်ယူမည်</button>
+            <button type="button" onclick="logoutAdmin()" style="background-color: #7f8c8d; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-family: 'Noto Sans Myanmar', sans-serif; font-size: 14px;">Log Out ထွက်မည်</button>
+        </div>
         
         <table id="adminTable" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
             <thead>
@@ -81,31 +89,22 @@
                     <th style="padding: 12px; border: 1px solid #ddd; width: 15%; text-align: center;">လုပ်ဆောင်ချက်</th>
                 </tr>
             </thead>
-            <tbody id="tableBody">
-                <!-- ဒေတာများ ဤနေရာသို့ ရောက်လာမည် -->
-            </tbody>
+            <tbody id="tableBody"></tbody>
         </table>
     </div>
 
-    <!-- ၅။ JavaScript စနစ်များ -->
+    <!-- ၆။ JavaScript စနစ်များ -->
     <script>
-        // (က) ဒေတာ ပို့သည့်စနစ်
         function sendData() {
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-
-            if(!name || !email || !message) {
-                alert('ကျေးဇူးပြု၍ အချက်အလက်အားလုံးကို ဖြည့်စွက်ပေးပါ။');
-                return;
-            }
-
-            const formData = { name, email, message };
+            if(!name || !email || !message) { alert('အချက်အလက်အားလုံး ဖြည့်ပေးပါ။'); return; }
 
             fetch('/submit-form', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({ name, email, message })
             })
             .then(response => response.json())
             .then(data => {
@@ -114,22 +113,52 @@
                 document.getElementById('email').value = '';
                 document.getElementById('message').value = '';
                 loadDashboardData();
-            })
-            .catch(error => alert('Server ချိတ်ဆက်မှု အဆင်မပြေပါ!'));
+            });
         }
 
-        // (ခ) ဒေတာ ပြန်ဆွဲပြသည့်စနစ်
+        function loginAdmin() {
+            const username = document.getElementById('adminUser').value;
+            const password = document.getElementById('adminPass').value;
+
+            fetch('/admin-login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "Success") {
+                    document.getElementById('loginBox').style.display = 'none';
+                    document.getElementById('dashboardSection').style.display = 'block';
+                    loadDashboardData();
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+
+        function logoutAdmin() {
+            fetch('/admin-logout')
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                document.getElementById('loginBox').style.display = 'block';
+                document.getElementById('dashboardSection').style.display = 'none';
+                document.getElementById('adminUser').value = '';
+                document.getElementById('adminPass').value = '';
+            });
+        }
+
         function loadDashboardData() {
             fetch('/get-contacts')
-            .then(response => response.json())
+            .then(response => {
+                if(response.status === 401) { return []; }
+                return response.json();
+            })
             .then(data => {
                 const tableBody = document.getElementById('tableBody');
                 tableBody.innerHTML = '';
-
-                if(data.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="5" style="padding: 15px; text-align: center; color: #777;">စာရင်းများ လုံးဝမရှိသေးပါ။</td></tr>`;
-                    return;
-                }
+                if(data.length === 0 || data.status === "Error") { return; }
 
                 data.forEach(item => {
                     const row = `
@@ -138,7 +167,6 @@
                             <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold; color: #2c3e50;">${item.name}</td>
                             <td style="padding: 12px; border: 1px solid #ddd; color: #555;">${item.email}</td>
                             <td style="padding: 12px; border: 1px solid #ddd; color: #333;">${item.message}</td>
-                            <!-- 🌟 ဖျက်ရန် ခလုတ်ထည့်သွင်းခြင်း -->
                             <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">
                                 <button type="button" onclick="deleteData(${item.id})" style="background-color: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-family: 'Noto Sans Myanmar', sans-serif;">ဖျက်မည်</button>
                             </td>
@@ -146,27 +174,16 @@
                     `;
                     tableBody.innerHTML += row;
                 });
-            })
-            .catch(error => console.error('Error:', error));
+            });
         }
 
-        // 🌟 (ဂ) Python Server ဆီ သတ်မှတ် ID အလိုက် သွားဖျက်ခိုင်းသည့် စနစ်သစ်
         function deleteData(id) {
-            if(confirm("ဤစာရင်းကို အပြီးပိုင် ဖျက်ပစ်ရန် သေချာပါသလား?")) {
-                fetch(`/delete-contact/${id}`, {
-                    method: 'DELETE'
-                })
+            if(confirm("ဤစာရင်းကို ဖျက်ရန် သေချာပါသလား?")) {
+                fetch(`/delete-contact/${id}`, { method: 'DELETE' })
                 .then(response => response.json())
-                .then(data => {
-                    alert(data.message);
-                    loadDashboardData(); // ဖျက်ပြီးရင် ဇယားကို Auto Update ဖြစ်အောင် ပြန်ခေါ်ခြင်း
-                })
-                .catch(error => alert('ဖျက်ပစ်ရန် ကြိုးစားမှု မအောင်မြင်ပါ!'));
+                .then(data => { alert(data.message); loadDashboardData(); });
             }
         }
-
-        window.onload = loadDashboardData;
     </script>
-
 </body>
 </html>
