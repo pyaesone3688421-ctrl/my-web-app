@@ -2,11 +2,12 @@ from flask import Flask, request, jsonify, send_from_directory, session
 import sqlite3
 import secrets
 
-app = Flask(__name__)
+# 🌟 ရိုးရိုးပုံသေစနစ်အတိုင်း အပြင်ကဖိုင်တွေကို တိုက်ရိုက်ဖတ်ခိုင်းခြင်း
+app = Flask(__name__, template_folder='.', static_folder='.')
 app.secret_key = secrets.token_hex(16)
 DB_NAME = "database.db"
 
-# 🌟 ဤနေရာတွင် မိမိစိတ်ကြိုက် Username နှင့် Password ကို ပြောင်းလဲနိုင်သည်
+# 🌟 မိမိစိတ်ကြိုက် Username နှင့် Password ပြောင်းလဲနိုင်သည်
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "password123"
 
@@ -97,4 +98,4 @@ def delete_contact(contact_id):
 
 if __name__ == '__main__':
     init_db()
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)
