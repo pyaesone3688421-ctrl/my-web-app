@@ -3,97 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termux Full-Stack Web App</title>
+    <title>Termux Bootstrap Web App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <!-- Google မြန်မာဖောင့် -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+    <!-- ကိုယ်ပိုင် style.css ဖိုင် -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ၁။ Navigation Menu -->
-    <nav class="navbar">
-        <div class="logo">MyWebsite</div>
-        <ul class="nav-links">
-            <li><a href="#">ပင်မစာမျက်နှာ</a></li>
-            <li><a href="#">အကြောင်းအရာ</a></li>
-            <li><a href="#">ဆက်သွယ်ရန်</a></li>
-        </ul>
+    <!-- ၁။ Bootstrap Navbar (မုနူးဘား) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info" href="#">MyWebsite</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">ပင်မစာမျက်နှာ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">အကြောင်းအရာ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">ဆက်သွယ်ရန်</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
-    <!-- ၂။ ဝန်ဆောင်မှု Cards -->
-    <h2 class="section-title">ကျွန်ုပ်တို့၏ ဝန်ဆောင်မှုများ</h2>
-    <div class="card-container">
-        <div class="card">
-            <h3>Frontend</h3>
-            <p>HTML, CSS, JavaScript တို့ဖြင့် လှပသော ဝဘ်ဆိုက်များ ဖန်တီးခြင်း။</p>
-        </div>
-        <div class="card">
-            <h3>Backend</h3>
-            <p>Node.js, Python တို့ဖြင့် စွမ်းဆောင်ရည်မြင့် စနစ်များ တည်ဆောက်ခြင်း။</p>
-        </div>
-        <div class="card">
-            <h3>Database</h3>
-            <p>MySQL, MongoDB တို့ဖြင့် အချက်အလက်များကို စနစ်တကျ သိမ်းဆည်းခြင်း။</p>
-        </div>
-    </div>
-
-    <!-- ၃။ ဆက်သွယ်ရန် Form -->
-    <h2 class="section-title">ဆက်သွယ်ရန် ဖောင်</h2>
-    <div class="form-container">
-        <form id="contactForm">
-            <div class="form-group">
-                <label for="name">နာမည်။</label>
-                <input type="text" id="name" placeholder="သင့်နာမည် ရိုက်ထည့်ပါ">
+    <div class="container my-5">
+        <!-- ၂။ ဝန်ဆောင်မှု Cards -->
+        <h2 class="text-center fw-bold text-secondary mb-5">ကျွန်ုပ်တို့၏ ဝန်ဆောင်မှုများ</h2>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="card h-100 custom-card">
+                    <div class="card-body text-center p-4">
+                        <div class="display-5 text-primary mb-3">🎨</div>
+                        <h5 class="card-title fw-bold text-dark">Frontend</h5>
+                        <p class="card-text text-muted">HTML, CSS, JavaScript တို့ဖြင့် လှပသော ဝဘ်ဆိုက်များ ဖန်တီးခြင်း။</p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">အီးမေးလ်။</label>
-                <input type="email" id="email" placeholder="သင့်အီးမေးလ် ရိုက်ထည့်ပါ">
+            <div class="col-md-4">
+                <div class="card h-100 custom-card">
+                    <div class="card-body text-center p-4">
+                        <div class="display-5 text-success mb-3">⚙️</div>
+                        <h5 class="card-title fw-bold text-dark">Backend</h5>
+                        <p class="card-text text-muted">Node.js, Python တို့ဖြင့် စွမ်းဆောင်ရည်မြင့် စနစ်များ တည်ဆောက်ခြင်း။</p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="message">ပေးပို့လိုသော စာတို။</label>
-                <textarea id="message" rows="4" placeholder="ဒီနေရာမှာ စာရေးပါ..."></textarea>
+            <div class="col-md-4">
+                <div class="card h-100 custom-card">
+                    <div class="card-body text-center p-4">
+                        <div class="display-5 text-warning mb-3">📦</div>
+                        <h5 class="card-title fw-bold text-dark">Database</h5>
+                        <p class="card-text text-muted">MySQL, MongoDB တို့ဖြင့် အချက်အလက်များကို စနစ်တကျ သိမ်းဆည်းခြင်း။</p>
+                    </div>
+                </div>
             </div>
-            <button type="button" class="btn-submit" onclick="sendData()">ပို့မည်</button>
-        </form>
-    </div>
-
-    <!-- ၄။ Admin Login Section (Dashboard အပေါ်တွင် ကာထားမည်) -->
-    <h2 class="section-title">Admin Login (စီမံခန့်ခွဲသူဝင်ရန်)</h2>
-    <div id="loginBox" class="form-container" style="max-width: 400px; margin-bottom: 30px;">
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" id="adminUser" placeholder="admin">
         </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="adminPass" placeholder="password123">
-        </div>
-        <button type="button" class="btn-submit" onclick="loginAdmin()">အကောင့်ဝင်မည်</button>
-    </div>
 
-    <!-- ၅။ Admin Dashboard (အစပိုင်းတွင် လုံခြုံရေးအရ ဝှက်ထားမည် `display: none`) -->
-    <div id="dashboardSection" class="dashboard-container" style="max-width: 900px; margin: 20px auto 50px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <button type="button" class="btn-submit" onclick="loadDashboardData()" style="width: auto; padding: 8px 15px; font-size: 14px; margin: 0;">စာရင်းအသစ်များ ပြန်ယူမည်</button>
-            <button type="button" onclick="logoutAdmin()" style="background-color: #7f8c8d; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-family: 'Noto Sans Myanmar', sans-serif; font-size: 14px;">Log Out ထွက်မည်</button>
+        <!-- ၃။ ဆက်သွယ်ရန် Form -->
+        <h2 class="text-center fw-bold text-secondary mt-5 mb-4">ဆက်သွယ်ရန် ဖောင်</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card custom-form-card p-4">
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">နာမည်</label>
+                            <input type="text" id="name" class="form-control custom-input" placeholder="သင့်နာမည် ရိုက်ထည့်ပါ">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">အီးမေးလ်</label>
+                            <input type="email" id="email" class="form-control custom-input" placeholder="သင့်အီးမေးလ် ရိုက်ထည့်ပါ">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">ပေးပို့လိုသော စာတို</label>
+                            <textarea id="message" class="form-control custom-input" rows="4" placeholder="ဒီနေရာမှာ စာရေးပါ..."></textarea>
+                        </div>
+                        <button type="button" class="btn btn-primary w-100 fw-bold py-2 shadow-sm" onclick="sendData()">ပို့မည်</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        
-        <table id="adminTable" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
-            <thead>
-                <tr style="background-color: #2c3e50; color: white;">
-                    <th style="padding: 12px; border: 1px solid #ddd; width: 8%;">ID</th>
-                    <th style="padding: 12px; border: 1px solid #ddd; width: 22%;">နာမည်</th>
-                    <th style="padding: 12px; border: 1px solid #ddd; width: 22%;">အီးမေးလ်</th>
-                    <th style="padding: 12px; border: 1px solid #ddd; width: 33%;">ပေးပို့လိုသော စာတို</th>
-                    <th style="padding: 12px; border: 1px solid #ddd; width: 15%; text-align: center;">လုပ်ဆောင်ချက်</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
-    </div>
 
-    <!-- ၆။ JavaScript စနစ်များ -->
+        <!-- ၄။ Admin Login Section -->
+        <h2 class="text-center fw-bold text-secondary mt-5 mb-4">Admin Login (စီမံခန့်ခွဲသူဝင်ရန်)</h2>
+        <div id="loginBox" class="row justify-content-center mb-5">
+            <div class="col-md-4">
+                <div class="card custom-form-card p-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Username</label>
+                        <input type="text" id="adminUser" class="form-control custom-input" placeholder="admin">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Password</label>
+                        <input type="password" id="adminPass" class="form-control custom-input" placeholder="password123">
+                    </div>
+                    <button type="button" class="btn btn-info w-100 text-white fw-bold py-2 shadow-sm" onclick="loginAdmin()">အကောင့်ဝင်မည်</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ၅။ Admin Dashboard -->
+        <div id="dashboardSection" class="card custom-form-card p-4 my-5" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <button type="button" class="btn btn-success fw-bold px-4 shadow-sm" onclick="loadDashboardData()">စာရင်းအသစ်များ ပြန်ယူမည်</button>
+                <button type="button" class="btn btn-secondary fw-bold px-4 shadow-sm" onclick="logoutAdmin()">Log Out ထွက်မည်</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle border">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 10%;">ID</th>
+                            <th style="width: 25%;">နာမည်</th>
+                            <th style="width: 25%;">အီးမေးလ်</th>
+                            <th style="width: 25%;">ပေးပို့လိုသော စာတို</th>
+                            <th style="width: 15%; text-align: center;">လုပ်ဆောင်ချက်</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- Container ပိတ် -->
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://jsdelivr.net"></script>
+    <!-- JavaScript စနစ်များ -->
     <script>
         function sendData() {
             const name = document.getElementById('name').value;
@@ -142,7 +181,7 @@
             .then(response => response.json())
             .then(data => {
                 alert(data.message);
-                document.getElementById('loginBox').style.display = 'block';
+                document.getElementById('loginBox').style.display = 'flex';
                 document.getElementById('dashboardSection').style.display = 'none';
                 document.getElementById('adminUser').value = '';
                 document.getElementById('adminPass').value = '';
@@ -151,10 +190,7 @@
 
         function loadDashboardData() {
             fetch('/get-contacts')
-            .then(response => {
-                if(response.status === 401) { return []; }
-                return response.json();
-            })
+            .then(response => { if(response.status === 401) { return []; } return response.json(); })
             .then(data => {
                 const tableBody = document.getElementById('tableBody');
                 tableBody.innerHTML = '';
@@ -162,13 +198,13 @@
 
                 data.forEach(item => {
                     const row = `
-                        <tr style="border-bottom: 1px solid #ddd; background-color: #fff;">
-                            <td style="padding: 12px; border: 1px solid #ddd;">${item.id}</td>
-                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold; color: #2c3e50;">${item.name}</td>
-                            <td style="padding: 12px; border: 1px solid #ddd; color: #555;">${item.email}</td>
-                            <td style="padding: 12px; border: 1px solid #ddd; color: #333;">${item.message}</td>
-                            <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">
-                                <button type="button" onclick="deleteData(${item.id})" style="background-color: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-family: 'Noto Sans Myanmar', sans-serif;">ဖျက်မည်</button>
+                        <tr>
+                            <td class="fw-bold">${item.id}</td>
+                            <td class="text-primary fw-bold">${item.name}</td>
+                            <td>${item.email}</td>
+                            <td class="text-muted">${item.message}</td>
+                            <td style="text-align: center;">
+                                <button type="button" class="btn btn-danger btn-sm shadow-sm" onclick="deleteData(${item.id})">ဖျက်မည်</button>
                             </td>
                         </tr>
                     `;
