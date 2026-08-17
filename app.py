@@ -1,13 +1,12 @@
-from flask import Flask, request, jsonify, send_from_directory, session
+from flask import Flask, request, jsonify, render_template, session
 import sqlite3
 import secrets
 
-# 🌟 ရိုးရိုးပုံသေစနစ်အတိုင်း အပြင်ကဖိုင်တွေကို တိုက်ရိုက်ဖတ်ခိုင်းခြင်း
-app = Flask(__name__, template_folder='.', static_folder='.')
+# templates နှင့် static folder လမ်းကြောင်းကို စံနှုန်းအတိုင်း သတ်မှတ်ခြင်း
+app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = secrets.token_hex(16)
 DB_NAME = "database.db"
 
-# 🌟 မိမိစိတ်ကြိုက် Username နှင့် Password ပြောင်းလဲနိုင်သည်
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "password123"
 
@@ -25,13 +24,10 @@ def init_db():
     conn.commit()
     conn.close()
 
+# templates folder ထဲက index.html ကို စနစ်တကျ ခေါ်ယူခြင်း
 @app.route('/')
 def home():
-    return send_from_directory('.', 'index.html')
-
-@app.route('/<path:path>')
-def send_static(path):
-    return send_from_directory('.', path)
+    return render_template('index.html')
 
 @app.route('/submit-form', methods=['POST'])
 def submit_form():
@@ -98,4 +94,4 @@ def delete_contact(contact_id):
 
 if __name__ == '__main__':
     init_db()
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
