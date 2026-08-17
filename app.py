@@ -3,13 +3,10 @@ import sqlite3
 import secrets
 
 app = Flask(__name__)
-
-# Session လုံခြုံရေးအတွက် လျှို့ဝှက်ကုဒ် သတ်မှတ်ခြင်း
 app.secret_key = secrets.token_hex(16)
-
 DB_NAME = "database.db"
 
-# စမ်းသပ်ရန် Admin အကောင့် Username နှင့် Password
+# 🌟 ဤနေရာတွင် မိမိစိတ်ကြိုက် Username နှင့် Password ကို ပြောင်းလဲနိုင်သည်
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "password123"
 
@@ -51,31 +48,26 @@ def submit_form():
     except Exception as e:
         return jsonify({"status": "Error", "message": "ဒေတာဘေ့စ်အမှားအယွင်း ဖြစ်ပွားခဲ့သည်။"})
 
-# Admin Login စစ်ဆေးပေးမည့် API ลမ်းကြောင်း
 @app.route('/admin-login', methods=['POST'])
 def admin_login():
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
-    
     if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
         session['logged_in'] = True 
         return jsonify({"status": "Success", "message": "အကောင့်ဝင်ခြင်း အောင်မြင်ပါသည်။"})
     else:
         return jsonify({"status": "Error", "message": "Username သို့မဟုတ် Password မှားယွင်းနေပါသည်။"})
 
-# Log Out ပြန်ထွက်မည့် API လမ်းကြောင်း
 @app.route('/admin-logout', methods=['GET'])
 def admin_logout():
     session.pop('logged_in', None)
     return jsonify({"status": "Success", "message": "အကောင့်ထဲမှ ထွက်လိုက်ပါပြီ။"})
 
-# ဒေတာလှမ်းယူသည့်စနစ် (လုံခြုံရေးပိတ်ထားသည်)
 @app.route('/get-contacts', methods=['GET'])
 def get_contacts():
     if not session.get('logged_in'):
         return jsonify({"status": "Error", "message": "ကျေးဇူးပြု၍ အရင်ဆုံး Log In ဝင်ပေးပါ။"}), 401
-        
     try:
         conn = sqlite3.connect(DB_NAME)
         cursor = conn.cursor()
@@ -89,12 +81,10 @@ def get_contacts():
     except Exception as e:
         return jsonify({"status": "Error", "message": str(e)})
 
-# ဒေတာဖျက်သည့်စနစ် (လုံခြုံရေးပိတ်ထားသည်)
 @app.route('/delete-contact/<int:contact_id>', methods=['DELETE'])
 def delete_contact(contact_id):
     if not session.get('logged_in'):
         return jsonify({"status": "Error", "message": "ခွင့်ပြုချက်မရှိပါ။"}), 401
-        
     try:
         conn = sqlite3.connect(DB_NAME)
         cursor = conn.cursor()
